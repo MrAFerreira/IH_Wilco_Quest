@@ -1,29 +1,40 @@
-# quest-template
+# Ironhack/Wilco Quest
 
-## Quest Details 
-#### title: 
-#### level: 
+## Quest Details
+
+#### title: Stylizing components
+
+#### level: Begginer
+
 #### skills:
-#### dependencies: 
 
+- React
+- styled-components
+- CSS
 
-## Overview 
-Explain what the quest is about and describe the main task the user needs to perform in this quest. 
+#### dependencies:
 
+## Overview
+
+Explain what the quest is about and describe the main task the user needs to perform in this quest.
 
 ## Outline
-Describe each step in the quest. 
-- Step 1 [step id]: 
+
+Describe each step in the quest.
+
+- Step 1 [step id]:
 - Step 2 [step id]:
 - ...
 
-
 ## Textbook solution
-For each step, describle all actions the user needs to perform to complete the step, including links to PRs as they would need to be written to pass checks. 
-Before submitting your quest for review, test your quest in snack and check the instructions you wrote. Make sure that by following these instructions, you are able to successfully complete the quest.  
-### Instructions for completing the quest: 
-#### Step 1 [step id]: 
- 
+
+For each step, describle all actions the user needs to perform to complete the step, including links to PRs as they would need to be written to pass checks.
+Before submitting your quest for review, test your quest in snack and check the instructions you wrote. Make sure that by following these instructions, you are able to successfully complete the quest.
+
+### Instructions for completing the quest:
+
+#### Step 1 [step id]:
+
 #### Step 2 [step id]:
 
 ...
