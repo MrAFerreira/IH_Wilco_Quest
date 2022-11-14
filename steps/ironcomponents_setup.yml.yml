@@ -15,6 +15,7 @@ startFlow:
             delay: 3500
 trigger:
   type: github_pr_lifecycle_status
+  flowNode:
   if:
   conditions:
     - conditionId: github_is_file_modified
