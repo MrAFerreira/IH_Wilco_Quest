@@ -5,8 +5,6 @@ summary: "Let me paint you a picture: imagine that everytime you need to fix som
 level: beginner
 steps:
   - ironcomponents_setup
-  - ironcomponents_themes
-  - funneldrop_fixing_bug_pr
 duration: 1.5
 skills:
   - frontend
