@@ -27,14 +27,14 @@ trigger:
           onFalseParams:
             pr_reject_message: 'Did you add the styled-components package to the dependency list? Make sure to add it to the **frontend** project.'
             pr_reject_message_name: 'missing_dependency'
-          then:
-            do:
-              - actionId: bot_message
-            params:
-            person: keen
-            messages:
-              - text: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
-              - actionId: finish_step
+      then:
+        do:
+          - actionId: bot_message
+        params:
+        person: keen
+        messages:
+          - text: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
+          - actionId: finish_step
     else:
       do:
         - actionId: bot_message
