@@ -11,7 +11,7 @@ startFlow:
         messages:
           - text: "Looks like we need to update the way we're doing our CSS for the application. It would be a good idea to start using the styled-components library and have some CSS on JS action. Install the package in the application and try to do the initial setup."
             delay: 2000
-          - text: "Here's the [documentation](https://styled-components.com/docs). For now just set up the Theme Provider with a theme variable on index.js so that later we can use some styles everywhere troughout the application. For now that theme variable can be an empty object."
+          - text: "Here's the [documentation](https://styled-components.com/docs). For now just set up the Theme Provider with a theme variable on index.js so that later we can use some styles everywhere troughout the application. For now that theme variable can be an empty object. After you've done that remember to submit a PR."
             delay: 3500
 trigger:
   type: github_pr_lifecycle_status
@@ -35,6 +35,10 @@ trigger:
               messages:
                 - text: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
                 - actionId: finish_step
+          - actionId: github_pr_approve
+            params:
+              person: keen
+              message: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
       else:
         do:
           - actionId: bot_message
