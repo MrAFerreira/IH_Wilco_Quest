@@ -27,6 +27,15 @@ trigger:
           onFalseParams:
             pr_reject_message: 'Did you add the styled-components package to the dependency list? Make sure to add it to the **frontend** project.'
             pr_reject_message_name: 'missing_dependency'
+        - conditionId: github_is_file_modified
+          params:
+            defaultResult: true
+          paramsFramework:
+            node:
+              fileName: frontend/src/index.js
+          onFalseParams:
+            pr_reject_message: 'Did you add the ThemeProvider in index.js?'
+            pr_reject_message_name: 'missing_setup'
       then:
         do:
           - actionId: bot_message
