@@ -1,15 +1,15 @@
 id: iron_components
 title: Styled Components
 description: "Do you like Javascript? Do you like having your HTML in your Javascript? Well, what if we also add CSS into Javascript? \n\n We found this pretty amazing library that allows us to write styles directly in our jsx components!"
-summary: "Let me paint you a picture: imagine that everytime you need to fix something on your styles you know **exactly** where to find it. Sounds amazing right? Well, we're not exactly there but we're very close. \n\n One of our team members has been researching the styled-components library and we thinks it's finaçlly time to apply it. Just like the name implies, we'll be styling our components directly. That means no more ctrl+f in all of the css files trying to find which class in particular is messing up our layout. Now we'll know that the styles will be available straight in the component file!"
+summary: "Let me paint you a picture: imagine that everytime you need to fix something on your styles you know **exactly** where to find it. Sounds amazing right? Well, we're not exactly there but we're very close. \n\n One of our team members has been researching the styled-components library and we thinks it's finally time to apply it. Just like the name implies, we'll be styling our components directly. That means no more ctrl+f in all of the css files trying to find which class in particular is messing up our layout. Now we'll know that the styles will be available straight in the component file!"
 level: beginner
 steps:
   - ironcomponents_setup
+  - ironcomponents_global
 duration: 1.5
 skills:
   - frontend
   - refactoring
-  - observability
   - communication
 questDependency: docker_localsetup
 slogan: It's time for...

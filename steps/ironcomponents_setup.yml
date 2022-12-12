@@ -11,7 +11,11 @@ startFlow:
         messages:
           - text: "Looks like we need to update the way we're doing our CSS for the application. It would be a good idea to start using the styled-components library and have some CSS on JS action. Install the package in the application and try to do the initial setup."
             delay: 2000
-          - text: "Here's the [documentation](https://styled-components.com/docs). For now just set up the Theme Provider with a theme variable on index.js so that later we can use some styles everywhere troughout the application. For now that theme variable can be an empty object. After you've done that remember to submit a PR."
+          - text: "Here's the [documentation](https://styled-components.com/docs). For now you just need to do a couple of things."
+            delay: 3500
+          - text: "First, install the styled-components package in the frontend folder. After that create a folder in the frontend src directory called styles. Inside create a file called theme.js. This is where we'll write our theme object! For now you can just export an object with two properties: dark, with the value #170539 and light with the value #af93f2. Can you guess where these will be used? "
+            delay: 3500
+          - text: "Lastly, import the ThemeProvider component into index.js and set it up to use the theme object you created. Open up a PR once you're done."
             delay: 3500
 trigger:
   type: github_pr_lifecycle_status
@@ -35,7 +39,16 @@ trigger:
               fileName: frontend/src/index.js
           onFalseParams:
             pr_reject_message: 'Did you add the ThemeProvider in index.js?'
-            pr_reject_message_name: 'missing_setup'
+            pr_reject_message_name: 'missing_provider'
+        - conditionId: github_is_file_added
+          params:
+            defaultResult: true
+          paramsFramework:
+            node:
+              fileName: frontend/src/styles/theme.js
+          onFalseParams:
+            pr_reject_message: 'Did you create a styles folder and the theme.js file inside?'
+            pr_reject_message_name: 'missing_theme'
       then:
         do:
           - actionId: bot_message
@@ -43,11 +56,11 @@ trigger:
               person: keen
               messages:
                 - text: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
-                - actionId: finish_step
           - actionId: github_pr_approve
             params:
               person: keen
               message: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
+          - actionId: finish_step
       else:
         do:
           - actionId: bot_message

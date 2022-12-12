@@ -1,0 +1,65 @@
+id: ironcomponents_global
+learningObjectives:
+  - Setting up the global styles
+hints:
+  - Missing
+startFlow:
+  do:
+    - actionId: bot_message
+      params:
+        person: keen
+        messages:
+          - text: "Let's leave the theme we just created for a while and let's also setup the global styles. These will be useful if we want to define some constant properties trough our application, like a default spacing or colors."
+            delay: 2000
+          - text: "For this you can create inside the styles folder a new file called GlobalStyle.js. Yes, it's going to be a component! You can check the [docs](https://styled-components.com/docs/api#createglobalstyle) to see how to create it. Ours doesn't need any props yet."
+            delay: 3500
+          - text: "For now you can just setup the default values for the body tag that you can find on the custom.scss file (background-image, position and repeat). Once you're done, import it into index.js and add it to your React tree, inside of ThemeProvider. Don't forget to open a PR so we can review the changes!"
+            delay: 3500
+trigger:
+  type: github_pr_lifecycle_status
+  flowNode:
+    if:
+      conditions:
+        - conditionId: github_is_file_modified
+          params:
+            defaultResult: true
+          paramsFramework:
+            node:
+              fileName: frontend/src/index.js
+          onFalseParams:
+            pr_reject_message: 'Did you add the GlobalStyle in index.js?'
+            pr_reject_message_name: 'missing_setup_global'
+        - conditionId: github_is_file_added
+          params:
+            defaultResult: true
+          paramsFramework:
+            node:
+              fileName: frontend/src/styles/GlobalStyle.js
+          onFalseParams:
+            pr_reject_message: 'Did you create the GlobalStyle.js inside the styles folder?'
+            pr_reject_message_name: 'missing_file_global'
+      then:
+        do:
+          - actionId: bot_message
+            params:
+              person: keen
+              messages:
+                - text: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
+          - actionId: github_pr_approve
+            params:
+              person: keen
+              message: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
+          - actionId: finish_step
+      else:
+        do:
+          - actionId: bot_message
+            params:
+              person: keen
+              messages:
+                - text: '${pr_reject_message}'
+                  delay: 1000
+          - actionId: github_pr_reject
+            params:
+              person: keen
+              message: '${pr_reject_message}'
+              messageName: '${pr_reject_message_name}'
