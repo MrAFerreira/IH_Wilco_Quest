@@ -13,7 +13,7 @@ startFlow:
             delay: 2000
           - text: "For this you can create inside the styles folder a new file called GlobalStyle.js. Yes, it's going to be a component! You can check the [docs](https://styled-components.com/docs/api#createglobalstyle) to see how to create it. Ours doesn't need any props yet."
             delay: 3500
-          - text: "For now you can just setup the default values for the body tag that you can find on the custom.scss file (background-image, position and repeat). Once you're done, import it into index.js and add it to your React tree, inside of ThemeProvider. Don't forget to open a PR so we can review the changes!"
+          - text: "For now you can just setup the default values for the body tag that you can find on the custom.scss file (background-image, position and repeat). Once you're done, import it into index.js and add it to your React tree, inside of ThemeProvider. Don't forget to open a PR so we can review all the changes!"
             delay: 3500
 trigger:
   type: github_pr_lifecycle_status
@@ -25,9 +25,18 @@ trigger:
             defaultResult: true
           paramsFramework:
             node:
+              fileName: frontend/package.json
+          onFalseParams:
+            pr_reject_message: 'Did you add the styled-components package to the dependency list? Make sure to add it to the **frontend** project.'
+            pr_reject_message_name: 'missing_dependency'
+        - conditionId: github_is_file_modified
+          params:
+            defaultResult: true
+          paramsFramework:
+            node:
               fileName: frontend/src/index.js
           onFalseParams:
-            pr_reject_message: 'Did you add the GlobalStyle in index.js?'
+            pr_reject_message: 'Did you add the ThemeProvider and GlobalStyle in index.js?'
             pr_reject_message_name: 'missing_setup_global'
         - conditionId: github_is_file_added
           params:

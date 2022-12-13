@@ -15,62 +15,21 @@ startFlow:
             delay: 3500
           - text: "First, install the styled-components package in the frontend folder. After that create a folder in the frontend src directory called styles. Inside create a file called theme.js. This is where we'll write our theme object! For now you can just export an object with two properties: dark, with the value #170539 and light with the value #af93f2. Can you guess where these will be used? "
             delay: 3500
-          - text: "Lastly, import the ThemeProvider component into index.js and set it up to use the theme object you created. Open up a PR once you're done."
+          - text: "Lastly, import the ThemeProvider component into index.js and set it up to use the theme object you created. Let me know once you've finished."
             delay: 3500
 trigger:
-  type: github_pr_lifecycle_status
+  type: user_message
+  params:
+    person: keen
   flowNode:
     if:
       conditions:
-        - conditionId: github_is_file_modified
-          params:
-            defaultResult: true
-          paramsFramework:
-            node:
-              fileName: frontend/package.json
-          onFalseParams:
-            pr_reject_message: 'Did you add the styled-components package to the dependency list? Make sure to add it to the **frontend** project.'
-            pr_reject_message_name: 'missing_dependency'
-        - conditionId: github_is_file_modified
-          params:
-            defaultResult: true
-          paramsFramework:
-            node:
-              fileName: frontend/src/index.js
-          onFalseParams:
-            pr_reject_message: 'Did you add the ThemeProvider in index.js?'
-            pr_reject_message_name: 'missing_provider'
-        - conditionId: github_is_file_added
-          params:
-            defaultResult: true
-          paramsFramework:
-            node:
-              fileName: frontend/src/styles/theme.js
-          onFalseParams:
-            pr_reject_message: 'Did you create a styles folder and the theme.js file inside?'
-            pr_reject_message_name: 'missing_theme'
+        - conditionId: is_user_message_text_ready_to_continue
       then:
         do:
           - actionId: bot_message
             params:
               person: keen
               messages:
-                - text: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
-          - actionId: github_pr_approve
-            params:
-              person: keen
-              message: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
+                - text: "Awesome! We'll use this theme in the future, but for now let's finish the setup before we start thinkering."
           - actionId: finish_step
-      else:
-        do:
-          - actionId: bot_message
-            params:
-              person: keen
-              messages:
-                - text: '${pr_reject_message}'
-                  delay: 1000
-          - actionId: github_pr_reject
-            params:
-              person: keen
-              message: '${pr_reject_message}'
-              messageName: '${pr_reject_message_name}'
