@@ -3,19 +3,22 @@ learningObjectives:
   - Setting up the styled-components library
 hints:
   - Make sure that you are wrapping the application with the ThemeProvider
+  - Don't forget to import both the ThemeProvider and the theme variable into index.js
 startFlow:
   do:
     - actionId: bot_message
       params:
         person: keen
         messages:
-          - text: "Looks like we need to update the way we're doing our CSS for the application. It would be a good idea to start using the styled-components library and have some CSS on JS action. Install the package in the application and try to do the initial setup."
+          - text: "We need to make our components tough as iron. It would be a good idea to start using the styled-components library and have some CSS on JS action. We'll start by installing the package in the application and doing the initial setup."
             delay: 2000
-          - text: "Here's the [documentation](https://styled-components.com/docs). For now you just need to do a couple of things."
+          - text: "Here's the [documentation](https://styled-components.com/docs). For now you just need to do a couple of things:"
             delay: 3500
-          - text: "First, install the styled-components package in the frontend folder. After that create a folder in the frontend src directory called styles. Inside create a file called theme.js. This is where we'll write our theme object! For now you can just export an object with two properties: dark, with the value #170539 and light with the value #af93f2. Can you guess where these will be used? "
+          - text: 'First, create a new branch and install the styled-components package in the **frontend folder**. After that create a folder in the **frontend/src** directory called **styled**.'
             delay: 3500
-          - text: "Lastly, import the ThemeProvider component into index.js and set it up to use the theme object you created. Let me know once you've finished."
+          - text: "Inside create a file called **theme.js**. This is where we'll write our **theme object**! \n\n For now you can just export an object with two properties: **dark**, with the value #170539 and **light** with the value #af93f2.\n\nCan you guess where these will be used? "
+            delay: 3500
+          - text: "Last but not least, import the **ThemeProvider** component into **index.js** and set it up to use the theme object you created. Let me know once you've finished!"
             delay: 3500
 trigger:
   type: user_message

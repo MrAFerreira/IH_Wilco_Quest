@@ -2,39 +2,47 @@
 
 ## Quest Details
 
-#### title: Stylizing components
+#### title: Ironcomponents
 
 #### level: Begginer
 
 #### skills:
 
-- React
-- styled-components
-- CSS
+- frontend
+- setup
 
 #### dependencies:
 
+- docker_localsetup
+
 ## Overview
 
-Explain what the quest is about and describe the main task the user needs to perform in this quest.
+The objective of this quest is for the user to learn how to setup the styled-components library for future use
 
 ## Outline
 
 Describe each step in the quest.
 
-- Step 1 [step id]:
-- Step 2 [step id]:
-- ...
+- Ironcomponents Setup [ironcomponents_setup]: The user will install the styled-components package and setup the ThemeProvider and theme vriable
+- Ironcomponents Global [ironcomponents_global]: The user will create the GlobalStyle component and add some of the already existing css styles to it
 
 ## Textbook solution
 
-For each step, describle all actions the user needs to perform to complete the step, including links to PRs as they would need to be written to pass checks.
-Before submitting your quest for review, test your quest in snack and check the instructions you wrote. Make sure that by following these instructions, you are able to successfully complete the quest.
+For this quest the user needs to install the styled-components package and create the folders and files on the correct places and import the newly created files into index.js.
 
 ### Instructions for completing the quest:
 
-#### Step 1 [step id]:
+#### Ironcomponents Setup [ironcomponents_setup]:
 
-#### Step 2 [step id]:
+- Install the styled-components package in the frontend folder
+- Create a styled folder inside frontend/src
+- Create a theme.js inside the styled folder
+- Create an object with two properties, dark (#170539) and light (#af93f2)
+- Import the theme object created previously and the ThemeProvider from styled-components into index.js
+- Setup the ThemeProvider in the React tree using the theme variable
 
-...
+#### Ironcomponents Global [ironcomponents_global]:
+
+- Inside the styled folder create a GlobalStyle.js file
+- In the GlobalStyle file setup the component according to the [docs](https://styled-components.com/docs/api#createglobalstyle)
+- In the GlobalStyle component, setup the body's background-image, background-position and background-repeat properties available already in the custom.scss file
