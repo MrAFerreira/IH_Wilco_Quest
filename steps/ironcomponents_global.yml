@@ -12,9 +12,9 @@ startFlow:
         messages:
           - text: 'Now we need to take care of the **global styles**. These will be useful if we want to define some constant properties trough our application, like default spacing or colors.'
             delay: 2000
-          - text: "For this you can create inside the styled folder a new file called **GlobalStyle.js**. Yes, it's going to be a component! You can check the [docs](https://styled-components.com/docs/api#createglobalstyle) to see how to create it. Ours _doesn't need any props_ yet."
+          - text: "For this we need to add a file inside the styled folder. This file contains the **GlobalStyle.js**. Yes, it's going to be a component! You can check the [docs](https://styled-components.com/docs/api#createglobalstyle) to see how it works. Ours doesn't need any props yet."
             delay: 3500
-          - text: "Right now you can just setup the default values for the body tag that you can find on our **custom.scss** file **(background-image, position and repeat)**. Once you're done, import it into **index.js** and add it to your React tree, **below the ThemeProvider**. Don't forget to open a PR so we can review all the changes!"
+          - text: "If you look into the file you can see that we just setup the default values for the body tag that we have in our **custom.scss** file **(background-image, position and repeat)**. Once you're done, import it into **index.js** and add it to your React tree, **below the ThemeProvider**. Don't forget to open a PR so we can review all the changes!"
             delay: 3500
 trigger:
   type: github_pr_lifecycle_status

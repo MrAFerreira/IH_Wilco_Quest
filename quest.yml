@@ -5,6 +5,7 @@ summary: "Let me paint you a picture: imagine that everytime you need to fix som
 level: beginner
 steps:
   - ironcomponents_setup
+  - ironcomponents_theme
   - ironcomponents_global
 duration: 1
 skills:
