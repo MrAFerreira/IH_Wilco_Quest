@@ -1,75 +1,92 @@
 id: ironcomponents_global
 learningObjectives:
-  - Setting up the global styles
+  - Setting up the GlobalStyles component
 hints:
-  - Make sure the GlobalStyle is created inside the styled folder
-  - Check if you placed the GlobalStyle correctly in index.js (below ThemeProvider)
+  - Make sure the GlobalStyle is imported into index.js
+  - Check if you placed the GlobalStyle correctly in index.js (inside ThemeProvider)
+  - GlobalStyle should be a self-closing tag and without any props
 startFlow:
   do:
     - actionId: bot_message
       params:
         person: keen
         messages:
-          - text: 'Now we need to take care of the **global styles**. These will be useful if we want to define some constant properties trough our application, like default spacing or colors.'
+          - text: 'Last step, we need to take care of the **global styles**. These will be useful if we want to define some constant properties throughout our application, like default spacing or colors.'
             delay: 2000
-          - text: "For this we need to add a file inside the styled folder. This file contains the **GlobalStyle.js**. Yes, it's going to be a component! You can check the [docs](https://styled-components.com/docs/api#createglobalstyle) to see how it works. Ours doesn't need any props yet."
+          - text: 'For this we need the **GlobalStyle.js** inside the styled folder. This file contains the GlobalStyle component. You can check the [docs](https://styled-components.com/docs/api#createglobalstyle) to see how it works.'
+            delay: 2000
+          - text: 'If you look into the file you can see that we just setup the default values for the body tag that we already had in our css.'
             delay: 3500
-          - text: "If you look into the file you can see that we just setup the default values for the body tag that we have in our **custom.scss** file **(background-image, position and repeat)**. Once you're done, import it into **index.js** and add it to your React tree, **below the ThemeProvider**. Don't forget to open a PR so we can review all the changes!"
+          - text: ':instruction[Import the GlobalStyle into **index.js** and add it to your React tree, **inside the ThemeProvider component**.]'
             delay: 3500
+          - text: "**Open up a PR** once it's done."
+            delay: 1500
 trigger:
   type: github_pr_lifecycle_status
   flowNode:
-    if:
-      conditions:
-        - conditionId: github_is_file_modified
-          params:
-            defaultResult: true
-          paramsFramework:
-            node:
-              fileName: frontend/package.json
-          onFalseParams:
-            pr_reject_message: 'Did you add the styled-components package to the dependency list? Make sure to add it to the **frontend** project.'
-            pr_reject_message_name: 'missing_dependency'
-        - conditionId: github_is_file_modified
-          params:
-            defaultResult: true
-          paramsFramework:
-            node:
-              fileName: frontend/src/index.js
-          onFalseParams:
-            pr_reject_message: 'Did you add the ThemeProvider and GlobalStyle in index.js?'
-            pr_reject_message_name: 'missing_setup_global'
-        - conditionId: github_is_file_added
-          params:
-            defaultResult: true
-          paramsFramework:
-            node:
-              fileName: frontend/src/styled/GlobalStyle.js
-          onFalseParams:
-            pr_reject_message: 'Did you create the GlobalStyle.js inside the styled folder?'
-            pr_reject_message_name: 'missing_file_global'
-      then:
-        do:
-          - actionId: bot_message
-            params:
-              person: keen
-              messages:
-                - text: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
-          - actionId: github_pr_approve
-            params:
-              person: keen
-              message: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
-          - actionId: finish_step
-      else:
-        do:
-          - actionId: bot_message
-            params:
-              person: keen
-              messages:
-                - text: '${pr_reject_message}'
-                  delay: 1000
-          - actionId: github_pr_reject
-            params:
-              person: keen
-              message: '${pr_reject_message}'
-              messageName: '${pr_reject_message_name}'
+    switch:
+      key: '${eventType}'
+      cases:
+        github_pr_opened:
+          do:
+            - actionId: bot_message
+              params:
+                person: keen
+                messages:
+                  - text: "On it, I'll review the changes right away."
+                    delay: 1000
+            - actionId: github_pr_comment
+              params:
+                person: keen
+                message: "On it, I'll review the changes right away."
+        github_pr_workflow_complete_success:
+          if:
+            conditions:
+              - conditionId: github_is_file_modified
+                params:
+                  defaultResult: true
+                paramsFramework:
+                  node:
+                    fileName: frontend/src/index.js
+                onFalseParams:
+                  pr_reject_message: 'Did you add the GlobalStyle in index.js?'
+                  pr_reject_message_name: 'missing_setup_global'
+            then:
+              do:
+                - actionId: bot_message
+                  params:
+                    person: keen
+                    messages:
+                      - text: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
+                - actionId: github_pr_approve
+                  params:
+                    person: keen
+                    message: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
+            else:
+              do:
+                - actionId: bot_message
+                  params:
+                    person: keen
+                    messages:
+                      - text: '${pr_reject_message}'
+                        delay: 1000
+                - actionId: github_pr_reject
+                  params:
+                    person: keen
+                    message: '${pr_reject_message}'
+                    messageName: '${pr_reject_message_name}'
+        github_pr_workflow_complete_failure:
+          do:
+            - actionId: bot_message
+              params:
+                person: keen
+                messages:
+                  - text: 'I am seeing an error message from one of the tests in GitHub actions, please check it out and fix it.'
+                    delay: 3000
+            - actionId: github_pr_reject
+              params:
+                person: keen
+                message: 'Looks like there are some errors. Can you try to fix it?'
+        github_pr_merged:
+          do:
+            - actionId: finish_step

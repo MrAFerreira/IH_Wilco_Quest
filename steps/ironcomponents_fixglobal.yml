@@ -1,21 +1,18 @@
-id: ironcomponents_theme
+id: ironcomponents_fixglobal
 learningObjectives:
-  - Setting up the ThemeProvider
+  - Changing some faulty styles
 hints:
-  - Make sure that you are wrapping the application with the ThemeProvider
-  - Don't forget to import both the ThemeProvider and the theme variable into index.js
+  - Remove the css styles that are removing the image and adding a background color
 startFlow:
   do:
     - actionId: bot_message
       params:
         person: keen
         messages:
-          - text: "I've added a file called **theme.js** inside of the src/styles directory that contains a couple of styles. "
+          - text: 'Oh, something is definitely not right with our application. Have you seen that background color?'
             delay: 2000
-          - text: 'With this theme we can now setup the **ThemeProvider**. You can see how [here](https://styled-components.com/docs/advanced#theming). The only difference is that we want to do this on **index.js** (inside the src directory) and using the theme object we created.'
+          - text: "I apparently left a couple of extra lines on the GlobalStyle file, can you remove them? Don't forget to **open a PR** so we can review it."
             delay: 3500
-          - text: ":instruction[Import the ThemeProvider and use it below the ConnectedRouter, so it wraps the Switch component]. **Open a PR** when you're finished."
-            delay: 1000
 trigger:
   type: github_pr_lifecycle_status
   flowNode:
@@ -42,10 +39,10 @@ trigger:
                   defaultResult: true
                 paramsFramework:
                   node:
-                    fileName: frontend/src/index.js
+                    fileName: frontend/src/styles/GlobalStyle.js
                 onFalseParams:
-                  pr_reject_message: 'Did you add the ThemeProvider in index.js?'
-                  pr_reject_message_name: 'missing_setup_theme'
+                  pr_reject_message: 'Did you remove the extra code from the GlobalStyle file?'
+                  pr_reject_message_name: 'missing_fix'
             then:
               do:
                 - actionId: bot_message
