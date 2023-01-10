@@ -2,7 +2,7 @@ id: ironcomponents_setup
 learningObjectives:
   - Install the styled-components library
 hints:
-  - Add the package to the frontend folder trough the docker terminal using yarn add styled-components
+  - Add the package to the frontend folder using `docker exec -w /usr/src/frontend anythink-frontend-react yarn add styled-components`
   - Make sure you are in the frontend folder
   - Don't forget to restart the container
 startFlow:
@@ -25,9 +25,9 @@ startFlow:
             delay: 2000
           - text: "Here's the [documentation](https://styled-components.com/docs). For now you just need to do a couple of things:"
             delay: 2000
-          - text: 'First of all, run **git pull origin main** to have the latest changes.'
+          - text: 'First of all, run `git pull origin main` to have the latest changes.'
             delay: 2000
-          - text: ':instruction[ Then, create a new branch and install the styled-components package trough the **docker frontend image** using **yarn add**. You can use the integrated terminal on Docker Desktop.]'
+          - text: ':instruction[ Then, create a new branch and install the styled-components package trough the **docker frontend image** using **yarn add**.]'
             delay: 2000
           - text: 'It might also be a good idea to restart your docker container afterwards. **Open a PR** so we can review the changes.'
             delay: 2000

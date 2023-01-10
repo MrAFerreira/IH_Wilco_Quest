@@ -1,26 +1,22 @@
-id: ironcomponents_global
+id: ironcomponents_refactor
 learningObjectives:
-  - Setting up the GlobalStyles component
+  - Refactoring a component
 hints:
-  - Make sure the GlobalStyle is imported into index.js
-  - Check if you placed the GlobalStyle correctly in index.js (inside ThemeProvider)
-  - GlobalStyle should be a self-closing tag and without any props
+  - Did you import styled from styled components?
+  - You can create a `StyledBanner` component that should be a styled div that uses `props.theme.dark` as the background-color
+  - The styled div you created will wrap around all the previous content
 startFlow:
   do:
     - actionId: bot_message
       params:
         person: keen
         messages:
-          - text: 'Besides the theme we can also use **global styles**. These will be useful if we want to define some constant properties throughout our application, like default spacing or colors.'
+          - text: "Let's do a simple refactor of our banner component. "
             delay: 2000
-          - text: "For this we need the **GlobalStyle.js** file that I added inside the src/styled folder. This file contains the GlobalStyle component. It's already created but you can check the [docs](https://styled-components.com/docs/api#createglobalstyle) to see how it works."
-            delay: 2000
-          - text: 'If you look into the file you can see that we just setup the default values for the body tag that we already had in our css.'
+          - text: "For that we need to change it into a styled-component. You can see how it works in the [docs](https://styled-components.com/docs/basics#getting-started) It will be a styled div that accepts as a background color what we declared on our theme provider. [Here's](https://styled-components.com/docs/advanced#theming) how to connect with it."
             delay: 3500
-          - text: ':instruction[Import the GlobalStyle (from the file added) into **index.js** and place it in your React tree, **inside the ThemeProvider component**.]'
-            delay: 3500
-          - text: "**Open up a PR** once it's done."
-            delay: 1500
+          - text: ":instruction[Create a styled div for the banner that uses the dark theme as a background color. It will wrap around the existing content]. **Open a PR** when you're finished."
+            delay: 1000
 trigger:
   type: github_pr_lifecycle_status
   flowNode:
@@ -42,15 +38,15 @@ trigger:
         github_pr_workflow_complete_success:
           if:
             conditions:
-              - conditionId: github_does_file_contain
+              - conditionId: github_is_file_modified
                 params:
-                  regex: import GlobalStyle from "./styles/GlobalStyle"
+                  defaultResult: true
                 paramsFramework:
                   node:
-                    fileName: frontend/index.js
+                    fileName: frontend/src/Components/Home/Banner.js
                 onFalseParams:
-                  pr_reject_message: 'Did you add the GlobalStyle in index.js?'
-                  pr_reject_message_name: 'missing_setup_global'
+                  pr_reject_message: 'Did you create a styled component that wraps the existing Banner?'
+                  pr_reject_message_name: 'missing_banner_refactor'
             then:
               do:
                 - actionId: bot_message

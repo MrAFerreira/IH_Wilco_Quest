@@ -1,11 +1,12 @@
 id: iron_components
 title: Iron Components
 description: "Do you like Javascript? Do you like having your HTML in your Javascript? Well, what if we also add CSS into Javascript? \n\n We found this pretty amazing library that allows us to write styles directly in our jsx components!"
-summary: "Let me paint you a picture: imagine that everytime you need to fix something on your styles you know **exactly** where to find it. Sounds amazing right? Well, that's what we'll be working on. \n\n One of our team members has been researching the styled-components library and we thinks it's finally time to apply it. Just like the name implies, we'll be styling our components directly, in the file where they're created. That way we can make them as tough and secure as possible, without any outisde styling interference!"
+summary: "Let me paint you a picture: imagine that every time you need to fix something on your styles you know **exactly** where to find it. Sounds amazing right? Well, that's what we'll be working on. \n\n One of our team members has been researching the styled-components library and we thinks it's finally time to apply it. Just like the name implies, we'll be styling our components directly, in the file where they're created. That way we can make them as tough and secure as possible, without any outside styling interference!"
 level: beginner
 steps:
   - ironcomponents_setup
   - ironcomponents_theme
+  - ironcomponents_refactor
   - ironcomponents_global
   - ironcomponents_fixglobal
 duration: 1
