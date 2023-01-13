@@ -2,7 +2,7 @@ id: ironcomponents_global
 learningObjectives:
   - Setting up the GlobalStyles component
 hints:
-  - Make sure the GlobalStyle is imported into index.js
+  - Make sure the GlobalStyle is imported (from the correct file) into index.js
   - Check if you placed the GlobalStyle correctly in index.js (inside ThemeProvider)
   - GlobalStyle should be a self-closing tag and without any props
 startFlow:
@@ -42,12 +42,12 @@ trigger:
         github_pr_workflow_complete_success:
           if:
             conditions:
-              - conditionId: github_does_file_contain
+              - conditionId: github_is_file_modified
                 params:
-                  regex: import GlobalStyle from "./styles/GlobalStyle"
+                  defaultResult: true
                 paramsFramework:
                   node:
-                    fileName: frontend/index.js
+                    fileName: frontend/src/index.js
                 onFalseParams:
                   pr_reject_message: 'Did you add the GlobalStyle in index.js?'
                   pr_reject_message_name: 'missing_setup_global'

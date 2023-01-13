@@ -11,11 +11,11 @@ startFlow:
       params:
         person: keen
         messages:
-          - text: "Let's do a simple refactor of our banner component. "
+          - text: "Let's do a simple refactor of our Banner component. "
             delay: 2000
           - text: "For that we need to change it into a styled-component. You can see how it works in the [docs](https://styled-components.com/docs/basics#getting-started) It will be a styled div that accepts as a background color what we declared on our theme provider. [Here's](https://styled-components.com/docs/advanced#theming) how to connect with it."
             delay: 3500
-          - text: ":instruction[Create a styled div for the banner that uses the dark theme as a background color. It will wrap around the existing content]. **Open a PR** when you're finished."
+          - text: ":instruction[Create a styled div for the Banner that uses the dark theme as a background color. It will wrap around the existing content]. **Open a PR** when you're finished."
             delay: 1000
 trigger:
   type: github_pr_lifecycle_status

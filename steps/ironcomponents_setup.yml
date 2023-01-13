@@ -3,7 +3,6 @@ learningObjectives:
   - Install the styled-components library
 hints:
   - Add the package to the frontend folder using `docker exec -w /usr/src/frontend anythink-frontend-react yarn add styled-components`
-  - Make sure you are in the frontend folder
   - Don't forget to restart the container
 startFlow:
   do:
